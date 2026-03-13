@@ -14,11 +14,13 @@
    - `GOOGLE_CLIENT_ID=<ton_client_id>`
    - `GOOGLE_CLIENT_SECRET=<ton_client_secret>`
 
-## Base de donnees (recommande)
+## Base de donnees (obligatoire)
 Definis ces variables dans le service applicatif avec des references Railway:
-- `SPRING_DATASOURCE_URL=jdbc:postgresql://${{Postgres.PGHOST}}:${{Postgres.PGPORT}}/${{Postgres.PGDATABASE}}`
-- `SPRING_DATASOURCE_USERNAME=${{Postgres.PGUSER}}`
-- `SPRING_DATASOURCE_PASSWORD=${{Postgres.PGPASSWORD}}`
+- `PGHOST=${{Postgres.PGHOST}}`
+- `PGPORT=${{Postgres.PGPORT}}`
+- `PGDATABASE=${{Postgres.PGDATABASE}}`
+- `PGUSER=${{Postgres.PGUSER}}`
+- `PGPASSWORD=${{Postgres.PGPASSWORD}}`
 
 Si ton service PostgreSQL n'est pas nomme `Postgres`, remplace `Postgres` par le nom reel.
 

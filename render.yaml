@@ -11,23 +11,23 @@ services:
         value: prod
       - key: SESSION_COOKIE_SECURE
         value: "true"
-      - key: DB_HOST
+      - key: PGHOST
         fromDatabase:
           name: plato-quizz-db
           property: host
-      - key: DB_PORT
+      - key: PGPORT
         fromDatabase:
           name: plato-quizz-db
           property: port
-      - key: DB_NAME
+      - key: PGDATABASE
         fromDatabase:
           name: plato-quizz-db
           property: database
-      - key: SPRING_DATASOURCE_USERNAME
+      - key: PGUSER
         fromDatabase:
           name: plato-quizz-db
           property: user
-      - key: SPRING_DATASOURCE_PASSWORD
+      - key: PGPASSWORD
         fromDatabase:
           name: plato-quizz-db
           property: password
