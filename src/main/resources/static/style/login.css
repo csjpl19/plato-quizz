@@ -1,0 +1,155 @@
+/* Specific Styles for Login Page */
+
+.auth-layout {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: radial-gradient(circle at 100% 0%, var(--primary-soft) 0%, transparent 25%),
+                radial-gradient(circle at 0% 100%, var(--primary-soft) 0%, transparent 25%);
+}
+
+.auth-header {
+    height: 5rem;
+    display: flex;
+    align-items: center;
+}
+
+.auth-header .header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.auth-header .brand {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--primary);
+}
+
+.auth-main {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    padding: 2rem 0 4rem;
+}
+
+.auth-card {
+    max-width: 480px;
+    margin-inline: auto;
+    width: 100%;
+}
+
+.card-head {
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.card-head h1 {
+    font-size: 2rem;
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.025em;
+}
+
+.input-with-action {
+    position: relative;
+}
+
+.toggle-password {
+    position: absolute;
+    right: 0.75rem;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    padding: 0.25rem;
+    border-radius: var(--radius-sm);
+}
+
+.toggle-password:hover {
+    color: var(--primary);
+    background-color: var(--primary-soft);
+}
+
+.form-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    font-size: 0.875rem;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    color: var(--text-muted);
+}
+
+.checkbox-label input {
+    accent-color: var(--primary);
+}
+
+.forgot-link {
+    color: var(--primary);
+    font-weight: 600;
+}
+
+.forgot-link:hover {
+    text-decoration: underline;
+}
+
+.separator {
+    margin: 2rem 0;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    color: var(--text-light);
+    font-size: 0.875rem;
+}
+
+.separator::before,
+.separator::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background-color: var(--border);
+}
+
+.btn-google {
+    gap: 0.75rem;
+}
+
+.auth-footer {
+    margin-top: 2rem;
+    text-align: center;
+    font-size: 0.9375rem;
+    color: var(--text-muted);
+}
+
+.auth-footer a {
+    color: var(--primary);
+    font-weight: 700;
+}
+
+.auth-footer a:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 480px) {
+    .auth-card {
+        padding: 1.5rem;
+        border-radius: var(--radius-md);
+    }
+    
+    .form-options {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+}

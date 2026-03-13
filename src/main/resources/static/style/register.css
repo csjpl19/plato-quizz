@@ -1,0 +1,85 @@
+/* Specific Styles for Register Page */
+
+.auth-layout {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: radial-gradient(circle at 100% 0%, var(--primary-soft) 0%, transparent 25%),
+                radial-gradient(circle at 0% 100%, var(--primary-soft) 0%, transparent 25%);
+}
+
+.auth-header {
+    height: 5rem;
+    display: flex;
+    align-items: center;
+}
+
+.auth-header .header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.auth-header .brand {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--primary);
+}
+
+.auth-main {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    padding: 2rem 0 4rem;
+}
+
+.auth-card {
+    max-width: 600px;
+    margin-inline: auto;
+    width: 100%;
+}
+
+.card-head {
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.card-head h1 {
+    font-size: 2rem;
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.025em;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 1.5rem;
+}
+
+.auth-footer {
+    margin-top: 2rem;
+    text-align: center;
+    font-size: 0.9375rem;
+    color: var(--text-muted);
+}
+
+.auth-footer a {
+    color: var(--primary);
+    font-weight: 700;
+}
+
+.auth-footer a:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 640px) {
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .auth-card {
+        padding: 1.5rem;
+        border-radius: var(--radius-md);
+    }
+}

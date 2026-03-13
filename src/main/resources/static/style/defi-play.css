@@ -1,0 +1,82 @@
+.defi-title-block {
+    margin-bottom: 1.5rem;
+}
+
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    color: var(--text-muted);
+    font-weight: 600;
+    margin-bottom: 0.8rem;
+}
+
+.back-link:hover {
+    color: var(--primary);
+}
+
+.defi-title-block h1 {
+    font-size: 2rem;
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+}
+
+.last-score {
+    margin-bottom: 1rem;
+}
+
+.last-score h2 {
+    font-size: 1.15rem;
+    margin-bottom: 0.5rem;
+}
+
+.question-card {
+    margin-bottom: 1rem;
+}
+
+.question-card h2 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 0.6rem;
+}
+
+.question-text {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+}
+
+.answer-option {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    padding: 0.65rem 0.75rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    margin-bottom: 0.5rem;
+    cursor: pointer;
+}
+
+.answer-option:hover {
+    border-color: var(--primary);
+    background-color: var(--primary-soft);
+}
+
+.answer-option input {
+    margin-top: 0.2rem;
+}
+
+.submit-row {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 1rem;
+}
+
+@media (max-width: 768px) {
+    .submit-row {
+        justify-content: stretch;
+    }
+
+    .submit-row .btn {
+        width: 100%;
+    }
+}

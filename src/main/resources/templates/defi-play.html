@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="|Défi: ${defi.titre}, Plato-Quizz|">Défi, Plato-Quizz</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" th:href="@{/style/globals.css}" href="/style/globals.css">
+    <link rel="stylesheet" th:href="@{/style/accueil.css}" href="/style/accueil.css">
+    <link rel="stylesheet" th:href="@{/style/defi-play.css}" href="/style/defi-play.css">
+</head>
+<body>
+    <div class="page-shell">
+        <header class="site-header">
+            <div class="container header-container">
+                <a class="brand" th:href="@{/accueil}" href="/accueil">
+                    <span>Plato-Quizz</span>
+                </a>
+                <nav class="main-nav">
+                    <a th:href="@{/accueil}" href="/accueil">Tableau de bord</a>
+                    <a th:href="@{/quick-quiz}" href="/quick-quiz">Quiz rapide</a>
+                    <a th:href="@{/defis}" href="/defis" class="active">Défis du jour</a>
+                </nav>
+                <div class="user-menu">
+                    <span class="auth-badge" th:text="${connectionTypeMessage}">Connexion manuelle</span>
+                    <button id="profile-trigger" class="profile-trigger" aria-label="Menu profil">
+                        <img th:if="${pictureUrl != null}" th:src="${pictureUrl}" alt="Profil">
+                        <span th:if="${pictureUrl == null}" class="material-symbols-outlined">account_circle</span>
+                    </button>
+                    <div id="profile-dropdown" class="profile-dropdown card" hidden>
+                        <div class="dropdown-header">
+                            <p class="user-display-name" th:text="${displayName}">Utilisateur</p>
+                            <p class="user-email text-muted" th:text="${googleProfile != null ? googleProfile.email : ''}"></p>
+                        </div>
+                        <div class="dropdown-divider"></div>
+                        <div class="user-info-section">
+                            <p class="section-title">Type de compte</p>
+                            <p class="info-value" th:text="${connectionTypeMessage}">Standard</p>
+                        </div>
+                        <div class="dropdown-divider"></div>
+                        <form class="logout-form" th:action="@{/logout}" action="/logout" method="post">
+                            <input type="hidden" th:if="${_csrf != null}" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+                            <button type="submit" class="btn btn-ghost btn-full logout-btn">
+                                <span class="material-symbols-outlined">logout</span>
+                                Se déconnecter
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main class="container section-padding">
+            <section class="defi-title-block">
+                <a th:href="@{/defis}" href="/defis" class="back-link">
+                    <span class="material-symbols-outlined">arrow_back</span>
+                    Retour aux défis
+                </a>
+                <h1 th:text="${defi.titre}">Titre du défi</h1>
+                <p class="text-muted" th:text="${defi.description}">Description du défi.</p>
+            </section>
+
+            <div class="alert alert-success" th:if="${submissionResult}">
+                <strong>Résultat enregistré :</strong>
+                <span th:text="| ${submissionResult.score} points (${submissionResult.correctAnswers}/${submissionResult.totalQuestions})|"> 0 points (0/0)</span>
+                <span th:if="${submissionResult.alreadyCompleted}">. Votre ancienne tentative a été remplacée.</span>
+            </div>
+
+            <section class="last-score card" th:if="${existingParticipation != null}">
+                <h2>Dernière tentative</h2>
+                <p th:text="|Score: ${existingParticipation.scorePoints} points|">Score: 0 points</p>
+                <p th:text="|Bonnes réponses: ${existingParticipation.correctAnswers}/${existingParticipation.totalQuestions}|">Bonnes réponses: 0/0</p>
+                <p th:text="|Date: ${#temporals.format(existingParticipation.playedAt, 'dd/MM/yyyy HH:mm')}|">Date: 01/01/2026 10:00</p>
+            </section>
+
+            <form class="defi-form" method="post" th:action="@{|/defis/${defi.id}/submit|}" action="/defis/1/submit">
+                <article class="question-card card" th:each="question, stat : ${defi.questions}">
+                    <h2 th:text="|Question ${stat.count}|">Question 1</h2>
+                    <p class="question-text" th:text="${question.questionText}">Texte de la question.</p>
+
+                    <label class="answer-option" th:for="|q_${question.id}_A|">
+                        <input type="radio" th:id="|q_${question.id}_A|" th:name="|q_${question.id}|" value="A" required>
+                        <span th:text="${question.optionA}">Option A</span>
+                    </label>
+                    <label class="answer-option" th:for="|q_${question.id}_B|">
+                        <input type="radio" th:id="|q_${question.id}_B|" th:name="|q_${question.id}|" value="B">
+                        <span th:text="${question.optionB}">Option B</span>
+                    </label>
+                    <label class="answer-option" th:for="|q_${question.id}_C|">
+                        <input type="radio" th:id="|q_${question.id}_C|" th:name="|q_${question.id}|" value="C">
+                        <span th:text="${question.optionC}">Option C</span>
+                    </label>
+                    <label class="answer-option" th:for="|q_${question.id}_D|">
+                        <input type="radio" th:id="|q_${question.id}_D|" th:name="|q_${question.id}|" value="D">
+                        <span th:text="${question.optionD}">Option D</span>
+                    </label>
+                </article>
+
+                <div class="submit-row">
+                    <button type="submit" class="btn btn-primary btn-lg">Soumettre mes réponses</button>
+                </div>
+            </form>
+        </main>
+    </div>
+
+    <script>
+        const trigger = document.getElementById('profile-trigger');
+        const dropdown = document.getElementById('profile-dropdown');
+
+        trigger.addEventListener('click', (e) => {
+            e.stopPropagation();
+            dropdown.hidden = !dropdown.hidden;
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!dropdown.contains(e.target) && e.target !== trigger) {
+                dropdown.hidden = true;
+            }
+        });
+    </script>
+</body>
+</html>

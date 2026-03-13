@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inscription, Plato-Quizz</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" th:href="@{/style/globals.css}" href="/style/globals.css">
+    <link rel="stylesheet" th:href="@{/style/register.css}" href="/style/register.css">
+</head>
+<body>
+    <div class="auth-layout">
+        <header class="auth-header">
+            <div class="container header-container">
+                <a class="brand" th:href="@{/}" href="/">
+                    <span>Plato-Quizz</span>
+                </a>
+                <a class="btn btn-ghost" th:href="@{/login}" href="/login">Se connecter</a>
+            </div>
+        </header>
+
+        <main class="auth-main">
+            <div class="container">
+                <section class="auth-card card">
+                    <div class="card-head">
+                        <h1>Créer un compte</h1>
+                        <p class="text-muted">Rejoignez la communauté et commencez à défier vos amis.</p>
+                    </div>
+
+                    <div class="alert alert-success" th:if="${param.success}">
+                        Inscription réussie. Vous pouvez maintenant vous connecter.
+                    </div>
+                    <div class="alert alert-error" th:if="${param.error}">
+                        Une erreur est survenue lors de l'inscription.
+                    </div>
+
+                    <form id="register-form" class="register-form" th:action="@{/register}" action="/register" method="post" novalidate>
+                        <input type="hidden" th:if="${_csrf != null}" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label class="form-label" for="fullname">Nom complet</label>
+                                <input class="form-input" id="fullname" name="fullname" type="text" minlength="2" maxlength="120" placeholder="Ex: Carl Stephen" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label" for="email">Email</label>
+                                <input class="form-input" id="email" name="email" type="email" placeholder="stephen@gmail.com" autocomplete="email" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label" for="password">Mot de passe</label>
+                                <input class="form-input" id="password" name="password" type="password" minlength="8" placeholder="8 caractères minimum" autocomplete="new-password" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label" for="confirmPassword">Confirmer le mot de passe</label>
+                                <input class="form-input" id="confirmPassword" type="password" minlength="8" placeholder="Répétez le mot de passe" autocomplete="new-password" required>
+                            </div>
+                        </div>
+
+                        <button class="btn btn-primary btn-full mt-4" type="submit">Valider l'inscription</button>
+                    </form>
+
+                    <p class="auth-footer">
+                        Déjà un compte ?
+                        <a th:href="@{/login}" href="/login">Se connecter</a>
+                    </p>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        const form = document.getElementById('register-form');
+        const password = document.getElementById('password');
+        const confirmPassword = document.getElementById('confirmPassword');
+
+        form.addEventListener('submit', (e) => {
+            if (password.value !== confirmPassword.value) {
+                e.preventDefault();
+                confirmPassword.setCustomValidity('Les mots de passe ne correspondent pas.');
+                confirmPassword.reportValidity();
+            } else {
+                confirmPassword.setCustomValidity('');
+            }
+        });
+
+        confirmPassword.addEventListener('input', () => {
+            confirmPassword.setCustomValidity('');
+        });
+    </script>
+</body>
+</html>

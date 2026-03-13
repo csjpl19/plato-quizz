@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plato-Quizz, Défie votre savoir</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" th:href="@{/style/globals.css}" href="/style/globals.css">
+    <link rel="stylesheet" th:href="@{/style/index.css}" href="/style/index.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="container header-container">
+            <a class="brand" th:href="@{/}" href="/">
+                <span class="brand-name">Plato-Quizz</span>
+            </a>
+
+            <nav class="desktop-nav" aria-label="Navigation principale">
+                <a th:href="@{/features}" href="/features">Fonctionnalités</a>
+                <a th:href="@{/leaderboard}" href="/leaderboard">Classement</a>
+                <a th:href="@{/categories}" href="/categories">Catégories</a>
+                <a th:href="@{/about}" href="/about">À propos</a>
+            </nav>
+
+            <div class="header-actions">
+                <a class="btn btn-ghost" th:href="@{/login}" href="/login">Se connecter</a>
+                <a class="btn btn-primary" th:href="@{/register}" href="/register">Créer un compte</a>
+            </div>
+
+            <button class="mobile-menu-toggle" aria-label="Menu" aria-expanded="false">
+                <span class="material-symbols-outlined">menu</span>
+            </button>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero section-padding">
+            <div class="container hero-grid">
+                <div class="hero-content">
+                    <div class="badge-live">
+                        <span class="dot"></span>
+                        Session quiz en direct
+                    </div>
+                    <h1>Teste ta culture générale, <span>progression après progression.</span></h1>
+                    <p class="hero-description">
+                        Plato-Quizz te permet de jouer, apprendre et comparer tes performances avec des joueurs du monde entier sur une plateforme moderne et intuitive.
+                    </p>
+                    <div class="hero-btns">
+                        <a class="btn btn-primary btn-lg" th:href="@{/register}" href="/register">Commencer maintenant</a>
+                        <a class="btn btn-secondary btn-lg" th:href="@{/login}" href="/login">J'ai déjà un compte</a>
+                    </div>
+                    <div class="hero-stats">
+                        <div class="stat-item">
+                            <span class="stat-value">10k+</span>
+                            <span class="stat-label">joueurs actifs</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value">50+</span>
+                            <span class="stat-label">thèmes de quiz</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value">24/7</span>
+                            <span class="stat-label">matchmaking</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hero-visual" aria-hidden="true">
+                    <div class="quiz-preview-card">
+                        <div class="card-header">
+                            <span class="material-symbols-outlined">timer</span>
+                            <span class="timer">00:45</span>
+                        </div>
+                        <div class="skeleton-title"></div>
+                        <div class="skeleton-line"></div>
+                        <div class="options-grid">
+                            <div class="option active"></div>
+                            <div class="option"></div>
+                            <div class="option"></div>
+                            <div class="option"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="features section-padding">
+            <div class="container">
+                <div class="section-header text-center">
+                    <h2>Pourquoi choisir Plato-Quizz ?</h2>
+                    <p class="text-muted">Une expérience de jeu conçue pour le plaisir et l'apprentissage.</p>
+                </div>
+                <div class="feature-grid">
+                    <article class="feature-card">
+                        <div class="icon-box">
+                            <span class="material-symbols-outlined">trophy</span>
+                        </div>
+                        <h3>Compétition en temps réel</h3>
+                        <p>Défie des amis ou des inconnus et vois ton classement évoluer en direct sur le leaderboard mondial.</p>
+                    </article>
+                    <article class="feature-card">
+                        <div class="icon-box">
+                            <span class="material-symbols-outlined">auto_stories</span>
+                        </div>
+                        <h3>Contenu varié</h3>
+                        <p>Science, histoire, sport, pop culture, techno : il y a toujours un nouveau challenge à relever.</p>
+                    </article>
+                    <article class="feature-card">
+                        <div class="icon-box">
+                            <span class="material-symbols-outlined">query_stats</span>
+                        </div>
+                        <h3>Progression mesurable</h3>
+                        <p>Analyse tes scores, tes thèmes forts et ceux à renforcer grâce à ton tableau de bord personnel.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta-section container">
+            <div class="cta-card">
+                <h2>Prêt à prendre ta place sur le classement ?</h2>
+                <p>L'inscription est gratuite et prend moins d'une minute.</p>
+                <div class="cta-btns">
+                    <a class="btn btn-primary btn-lg" th:href="@{/register}" href="/register">Créer mon compte</a>
+                    <a class="btn btn-ghost" th:href="@{/login}" href="/login">Me connecter</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container footer-container">
+            <p class="copyright">© 2026 Plato-Quizz. Tous droits réservés.</p>
+            <nav class="footer-nav">
+                <a th:href="@{/terms}" href="/terms">Conditions</a>
+                <a th:href="@{/privacy}" href="/privacy">Confidentialité</a>
+                <a th:href="@{/contact}" href="/contact">Contact</a>
+            </nav>
+        </div>
+    </footer>
+
+    <script>
+        document.querySelector('.mobile-menu-toggle').addEventListener('click', function() {
+            const nav = document.querySelector('.desktop-nav');
+            const actions = document.querySelector('.header-actions');
+            nav.classList.toggle('active');
+            actions.classList.toggle('active');
+        });
+    </script>
+</body>
+</html>

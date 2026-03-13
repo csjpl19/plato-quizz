@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Défis du jour, Plato-Quizz</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" th:href="@{/style/globals.css}" href="/style/globals.css">
+    <link rel="stylesheet" th:href="@{/style/accueil.css}" href="/style/accueil.css">
+    <link rel="stylesheet" th:href="@{/style/defis.css}" href="/style/defis.css">
+</head>
+<body>
+    <div class="page-shell">
+        <header class="site-header">
+            <div class="container header-container">
+                <a class="brand" th:href="@{/accueil}" href="/accueil">
+                    <span>Plato-Quizz</span>
+                </a>
+
+                <nav class="main-nav">
+                    <a th:href="@{/accueil}" href="/accueil">Tableau de bord</a>
+                    <a th:href="@{/quick-quiz}" href="/quick-quiz">Quiz rapide</a>
+                    <a th:href="@{/defis}" href="/defis" class="active">Défis du jour</a>
+                </nav>
+
+                <div class="user-menu">
+                    <span class="auth-badge" th:text="${connectionTypeMessage}">Connexion manuelle</span>
+
+                    <button id="profile-trigger" class="profile-trigger" aria-label="Menu profil">
+                        <img th:if="${pictureUrl != null}" th:src="${pictureUrl}" alt="Profil">
+                        <span th:if="${pictureUrl == null}" class="material-symbols-outlined">account_circle</span>
+                    </button>
+
+                    <div id="profile-dropdown" class="profile-dropdown card" hidden>
+                        <div class="dropdown-header">
+                            <p class="user-display-name" th:text="${displayName}">Utilisateur</p>
+                            <p class="user-email text-muted" th:text="${googleProfile != null ? googleProfile.email : ''}"></p>
+                        </div>
+
+                        <div class="dropdown-divider"></div>
+
+                        <div class="user-info-section">
+                            <p class="section-title">Type de compte</p>
+                            <p class="info-value" th:text="${connectionTypeMessage}">Standard</p>
+                        </div>
+
+                        <div class="dropdown-divider"></div>
+
+                        <form class="logout-form" th:action="@{/logout}" action="/logout" method="post">
+                            <input type="hidden" th:if="${_csrf != null}" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+                            <button type="submit" class="btn btn-ghost btn-full logout-btn">
+                                <span class="material-symbols-outlined">logout</span>
+                                Se déconnecter
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main class="container section-padding">
+            <section class="defis-hero">
+                <h1>Défis du jour</h1>
+                <p class="text-muted">Répondez aux questions, accumulez des points et suivez votre progression.</p>
+            </section>
+
+            <section class="stats-row">
+                <article class="stat-card card">
+                    <span class="stat-label">Points défis</span>
+                    <p class="stat-value" th:text="${totalDefiPoints}">0</p>
+                </article>
+                <article class="stat-card card">
+                    <span class="stat-label">Défis terminés</span>
+                    <p class="stat-value" th:text="${totalDefisCompleted}">0</p>
+                </article>
+                <article class="stat-card card">
+                    <span class="stat-label">Bonnes réponses</span>
+                    <p class="stat-value" th:text="|${totalDefiCorrectAnswers} / ${totalDefiQuestions}|">0 / 0</p>
+                </article>
+            </section>
+
+            <div class="alert alert-error" th:if="${defiError}" th:text="${defiError}">
+                Une erreur est survenue.
+            </div>
+
+            <section class="defis-grid">
+                <article class="defi-card card" th:each="item : ${defis}">
+                    <div class="defi-header">
+                        <h2 th:text="${item.defi.titre}">Titre du défi</h2>
+                        <span class="status-badge status-done" th:if="${item.participation != null}">Terminé</span>
+                        <span class="status-badge status-new" th:if="${item.participation == null}">Nouveau</span>
+                    </div>
+                    <p class="text-muted" th:text="${item.defi.description}">Description du défi.</p>
+
+                    <div class="defi-meta">
+                        <span th:text="|Début: ${item.defi.startDate != null ? #temporals.format(item.defi.startDate, 'dd/MM/yyyy') : 'Immédiat'}|">Début: Immédiat</span>
+                        <span th:text="|Fin: ${item.defi.endDate != null ? #temporals.format(item.defi.endDate, 'dd/MM/yyyy') : 'Sans limite'}|">Fin: Sans limite</span>
+                    </div>
+
+                    <p class="score-line" th:if="${item.participation != null}" th:text="|Dernier score: ${item.participation.scorePoints} pts (${item.participation.correctAnswers}/${item.participation.totalQuestions})|">
+                        Dernier score: 0 pts (0/0)
+                    </p>
+
+                    <a class="btn btn-primary mt-4" th:href="@{|/defis/${item.defi.id}|}" href="/defis/1">
+                        Ouvrir le défi
+                    </a>
+                </article>
+            </section>
+
+            <section class="empty-state card" th:if="${#lists.isEmpty(defis)}">
+                <h2>Aucun défi disponible</h2>
+                <p class="text-muted">Ajoutez des défis et des questions en base pour les rendre visibles ici.</p>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        const trigger = document.getElementById('profile-trigger');
+        const dropdown = document.getElementById('profile-dropdown');
+
+        trigger.addEventListener('click', (e) => {
+            e.stopPropagation();
+            dropdown.hidden = !dropdown.hidden;
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!dropdown.contains(e.target) && e.target !== trigger) {
+                dropdown.hidden = true;
+            }
+        });
+    </script>
+</body>
+</html>

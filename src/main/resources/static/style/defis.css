@@ -1,0 +1,98 @@
+.defis-hero {
+    margin-bottom: 2rem;
+}
+
+.defis-hero h1 {
+    font-size: 2.2rem;
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+}
+
+.stats-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.stat-card {
+    padding: 1.25rem;
+}
+
+.stat-card .stat-label {
+    display: block;
+    color: var(--text-muted);
+    font-size: 0.875rem;
+}
+
+.stat-card .stat-value {
+    margin-top: 0.5rem;
+    font-size: 1.5rem;
+    font-weight: 800;
+}
+
+.defis-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.25rem;
+}
+
+.defi-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.defi-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+}
+
+.defi-header h2 {
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+.status-badge {
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 0.25rem 0.6rem;
+    border-radius: var(--radius-full);
+    white-space: nowrap;
+}
+
+.status-done {
+    background-color: var(--success-bg);
+    color: var(--success);
+}
+
+.status-new {
+    background-color: var(--primary-soft);
+    color: var(--primary);
+}
+
+.defi-meta {
+    display: grid;
+    gap: 0.2rem;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+.score-line {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-main);
+}
+
+.empty-state {
+    margin-top: 1.5rem;
+    text-align: center;
+}
+
+.empty-state h2 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}

@@ -1,0 +1,45 @@
+services:
+  - type: web
+    name: plato-quizz
+    runtime: docker
+    plan: free
+    dockerfilePath: ./Dockerfile
+    autoDeploy: true
+    healthCheckPath: /login
+    envVars:
+      - key: SPRING_PROFILES_ACTIVE
+        value: prod
+      - key: SESSION_COOKIE_SECURE
+        value: "true"
+      - key: DB_HOST
+        fromDatabase:
+          name: plato-quizz-db
+          property: host
+      - key: DB_PORT
+        fromDatabase:
+          name: plato-quizz-db
+          property: port
+      - key: DB_NAME
+        fromDatabase:
+          name: plato-quizz-db
+          property: database
+      - key: SPRING_DATASOURCE_USERNAME
+        fromDatabase:
+          name: plato-quizz-db
+          property: user
+      - key: SPRING_DATASOURCE_PASSWORD
+        fromDatabase:
+          name: plato-quizz-db
+          property: password
+      - key: GOOGLE_CLIENT_ID
+        sync: false
+      - key: GOOGLE_CLIENT_SECRET
+        sync: false
+
+databases:
+  - name: plato-quizz-db
+    databaseName: plato_quizz
+    user: plato_quizz_user
+    plan: free
+    postgresMajorVersion: "15"
+    ipAllowList: []

@@ -1,0 +1,204 @@
+/* Specific Styles for Accueil (Dashboard) Page */
+
+.site-header {
+    background-color: white;
+    border-bottom: 1px solid var(--border);
+    height: 4.5rem;
+    display: flex;
+    align-items: center;
+}
+
+.header-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.brand {
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: var(--primary);
+}
+
+.main-nav {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.main-nav a {
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    padding: 0.5rem 0.75rem;
+    border-radius: var(--radius-sm);
+}
+
+.main-nav a:hover, .main-nav a.active {
+    color: var(--primary);
+    background-color: var(--primary-soft);
+}
+
+.user-menu {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    position: relative;
+}
+
+.auth-badge {
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 0.25rem 0.75rem;
+    background-color: var(--primary-soft);
+    color: var(--primary);
+    border-radius: var(--radius-full);
+}
+
+.profile-trigger {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    border: 1px solid var(--border);
+    overflow: hidden;
+    cursor: pointer;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.profile-trigger:hover {
+    border-color: var(--primary);
+}
+
+.profile-trigger img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.profile-dropdown {
+    position: absolute;
+    top: calc(100% + 0.5rem);
+    right: 0;
+    width: 240px;
+    padding: 1rem;
+    z-index: 100;
+    animation: slideDown 0.2s ease;
+}
+
+@keyframes slideDown {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.dropdown-header {
+    margin-bottom: 1rem;
+}
+
+.user-display-name {
+    font-weight: 700;
+    font-size: 1rem;
+}
+
+.user-email {
+    font-size: 0.8125rem;
+}
+
+.dropdown-divider {
+    height: 1px;
+    background-color: var(--border);
+    margin: 1rem -1rem;
+}
+
+.section-title {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--text-light);
+    margin-bottom: 0.25rem;
+}
+
+.info-value {
+    font-size: 0.875rem;
+    font-weight: 600;
+}
+
+.logout-btn {
+    color: var(--error);
+    justify-content: flex-start;
+}
+
+.logout-btn:hover {
+    background-color: var(--error-bg);
+    color: var(--error);
+}
+
+/* Main Content */
+.welcome-hero {
+    margin-bottom: 3rem;
+}
+
+.welcome-hero h1 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    letter-spacing: -0.025em;
+    margin-bottom: 0.5rem;
+}
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.dash-card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.dash-card.highlight {
+    border-color: var(--primary);
+    background: linear-gradient(135deg, white 0%, var(--primary-soft) 100%);
+}
+
+.card-icon {
+    width: 3rem;
+    height: 3rem;
+    background-color: white;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+    color: var(--primary);
+}
+
+.dash-card h2 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+}
+
+.dash-card p {
+    color: var(--text-muted);
+    font-size: 0.9375rem;
+    flex: 1;
+}
+
+@media (max-width: 768px) {
+    .main-nav {
+        display: none;
+    }
+    
+    .welcome-hero h1 {
+        font-size: 2rem;
+    }
+    
+    .auth-badge {
+        display: none;
+    }
+}
